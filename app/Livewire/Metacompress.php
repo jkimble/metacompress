@@ -37,19 +37,25 @@ class Metacompress extends Component
         if ($this->image) {
             $path = $this->image->getRealPath();
             $image = Image::gd()->read($path);
+
+            $clientFileName = $this->image->hashName();
+            $clientFileType = $this->image->extension();
+            $clientFileOGName = $this->image->getClientOriginalName();
+            $nameStripped = substr($clientFileOGName, 0, strrpos($clientFileOGName,'.'));
+
             $quality = !empty($this->quality) ? (int)$this->quality : 90;
-            $filetype = !empty($this->filetype) ? $this->filetype : 'webp'; //default webp till I get file type from inpot
-            $compressedPath = storage_path('app/public/compressed_image.' . $filetype); //will use dynamic path, delete with cron. need logic, add image ids
-            switch ($filetype) {
+            $inputFileType = !empty($this->filetype) ? $this->filetype : $clientFileType;
+            $compressedPath = storage_path('app/public/' . $nameStripped . '.' . $inputFileType);
+
+            switch ($inputFileType) {
                 case 'webp':
                     $image->toWebp($quality)->save($compressedPath);
                     break;
                 case 'png':
-                    $image->toPng(interlaced: true)->save($compressedPath);
+                    $image->toPng(indexed: true)->save($compressedPath);
                     break;
                 case 'jpeg':
-                    //$image->encodeByExtension('jpeg', progressive: true, quality: $quality);
-                    $image->toJpeg($quality, progressive:true)->save($compressedPath); //saving needs better logic, ids
+                    $image->toJpeg($quality, progressive: true)->save($compressedPath); //saving needs better logic, ids
                     break;
                 default:
                     $image->encodeByExtension(quality: $quality);
