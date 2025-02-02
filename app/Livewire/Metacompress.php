@@ -19,6 +19,8 @@ class Metacompress extends Component
     use WithFileUploads;
     public $image;
     public $size;
+    public $quality;
+    public $filetype;
 
     public function render()
     {
@@ -29,14 +31,15 @@ class Metacompress extends Component
     {
         $this->validate([
             'image' => 'required|image',
+            'quality' => 'numeric|min:50|max:100'
         ]);
 
         if ($this->image) {
             $path = $this->image->getRealPath();
-            //$image = Image::imagick()->read($path);
             $image = Image::gd()->read($path);
-            $image->toWebp(70);
-            //$image->encode(new WebpEncoder(quality: 65));
+            $quality = !empty($this->quality) ? (int)$this->quality : 90;
+            $image->toWebp($quality);
+            //$image->encode(new WebpEncoder(quality: $quality));
             //$image->resize(200, 200);
             //$image->scaleDown(400, 300);
 
