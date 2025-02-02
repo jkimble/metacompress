@@ -24,25 +24,25 @@
                                 <div class="form-control">
                                     <label class="label cursor-pointer">
                                       <span class="label-text">Leave as is</span>
-                                      <input type="radio" wire:model='filetype' name="radio-type" class="radio" checked="checked" />
+                                      <input type="radio" value="leave" wire:model='filetype' name="radio-type" class="radio" checked="checked" />
                                     </label>
                                 </div>
                                 <div class="form-control">
                                     <label class="label cursor-pointer">
                                       <span class="label-text">WebP</span>
-                                      <input type="radio" wire:model='filetype' name="radio-type" class="radio" />
+                                      <input type="radio" value="webp" wire:model='filetype' name="radio-type" class="radio" />
                                     </label>
                                 </div>
                                 <div class="form-control">
                                     <label class="label cursor-pointer">
                                       <span class="label-text">PNG</span>
-                                      <input type="radio" wire:model='filetype' name="radio-type" class="radio" />
+                                      <input type="radio" value="png" wire:model='filetype' name="radio-type" class="radio" />
                                     </label>
                                 </div>
                                 <div class="form-control">
                                     <label class="label cursor-pointer">
                                       <span class="label-text">JPEG</span>
-                                      <input type="radio" wire:model='filetype' name="radio-type" class="radio" />
+                                      <input type="radio" value="jpeg" wire:model='filetype' name="radio-type" class="radio" />
                                     </label>
                                 </div>
                             </div>
