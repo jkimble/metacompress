@@ -16,7 +16,7 @@
                         <input type="file" wire:model="image" accept="image/*" class="file-input file-input-bordered">
                         <div class="field">
                             <label for="quality" class="block">Image Quality</label>
-                            <input id="quality" wire:model='quality' type="number" class="input" min="50" max="100" placeholder="90" />
+                            <input id="quality" wire:model='quality' type="number" class="input" placeholder="90" />
                         </div>
                         <div class="field">
                             <label>Convert Image To:</label>
@@ -24,7 +24,7 @@
                                 <div class="form-control">
                                     <label class="label cursor-pointer">
                                       <span class="label-text">Leave as is</span>
-                                      <input type="radio" value="leave" wire:model='filetype' name="radio-type" class="radio" checked="checked" />
+                                      <input type="radio" value="same" wire:model='filetype' name="radio-type" class="radio" checked="checked" />
                                     </label>
                                 </div>
                                 <div class="form-control">

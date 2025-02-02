@@ -31,20 +31,33 @@ class Metacompress extends Component
     {
         $this->validate([
             'image' => 'required|image',
-            'quality' => 'numeric|min:50|max:100'
+            'quality' => 'numeric|min:20|max:100'
         ]);
 
         if ($this->image) {
             $path = $this->image->getRealPath();
             $image = Image::gd()->read($path);
             $quality = !empty($this->quality) ? (int)$this->quality : 90;
-            $image->toWebp($quality);
-            //$image->encode(new WebpEncoder(quality: $quality));
+            $filetype = !empty($this->filetype) ? $this->filetype : 'webp'; //default webp till I get file type from inpot
+            $compressedPath = storage_path('app/public/compressed_image.' . $filetype); //will use dynamic path, delete with cron. need logic, add image ids
+            switch ($filetype) {
+                case 'webp':
+                    $image->toWebp($quality)->save($compressedPath);
+                    break;
+                case 'png':
+                    $image->toPng(interlaced: true)->save($compressedPath);
+                    break;
+                case 'jpeg':
+                    //$image->encodeByExtension('jpeg', progressive: true, quality: $quality);
+                    $image->toJpeg($quality, progressive:true)->save($compressedPath); //saving needs better logic, ids
+                    break;
+                default:
+                    $image->encodeByExtension(quality: $quality);
+                    break;
+            }
             //$image->resize(200, 200);
             //$image->scaleDown(400, 300);
-
-            $compressedPath = storage_path('app/public/compressed_image.webp');
-            $image->save($compressedPath);
+            //$image->save($compressedPath, $quality);
 
             return response()->download($compressedPath);
         } else {
