@@ -26,18 +26,7 @@ class Metacompress extends Component
         $this->validate([
             'image' => 'required|image',
         ]);
-
-        // $tempPath = $this->getTempFilePath() . '/original_' . time() . '.' . pathinfo($this->image->getClientOriginalExtension(), PATHINFO_EXTENSION);
-        // Image::make($this->image)->save($tempPath);
-
-        // event(new Event('livewire-upload-init', ['upload' => $this->upload]));
     }
-
-    // public function downloadCompressedImage()
-    // {
-    //     $compressedPath = $this->getTempFilePath() . '/compressed_' . basename($this->image);
-    //     return response()->download($compressedPath, basename($this->image));
-    // }
 
     public function compressImage()
     {
