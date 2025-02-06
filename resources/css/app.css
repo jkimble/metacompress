@@ -1,4 +1,6 @@
+@import "global/core";
 @import "global/typography";
+@import "content/forms";
 
 @tailwind base;
 @tailwind components;

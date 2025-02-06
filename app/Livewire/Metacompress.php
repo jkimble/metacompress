@@ -2,16 +2,9 @@
 
 namespace App\Livewire;
 
-use Illuminate\Support\Facades\Event;
 use Livewire\Component;
-use Illuminate\support\Facades\Storage;
 use Livewire\WithFileUploads;
 use Intervention\Image\ImageManager as Image;
-use Intervention\Image\Encoders\AutoEncoder;
-use Intervention\Image\Encoders\WebpEncoder;
-use Intervention\Image\Encoders\PngEncoder;
-use Intervention\Image\Encoders\JpegEncoder;
-use Intervention\Image\Drivers\Gd\Driver;
 
 
 class Metacompress extends Component
