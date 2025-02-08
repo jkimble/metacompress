@@ -14,6 +14,8 @@ class Metacompress extends Component
     public $size;
     public $quality;
     public $filetype;
+    public $img_w;
+    public $img_h;
 
     public function render()
     {
@@ -34,7 +36,7 @@ class Metacompress extends Component
             $clientFileName = $this->image->hashName();
             $clientFileType = $this->image->extension();
             $clientFileOGName = $this->image->getClientOriginalName();
-            $nameStripped = substr($clientFileOGName, 0, strrpos($clientFileOGName,'.'));
+            $nameStripped = substr($clientFileOGName, 0, strrpos($clientFileOGName, '.'));
 
             $quality = !empty($this->quality) ? (int)$this->quality : 90;
             $inputFileType = !empty($this->filetype) ? $this->filetype : $clientFileType;

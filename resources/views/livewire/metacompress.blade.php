@@ -4,7 +4,7 @@
           <div class="mx-auto max-w-2xl py-12 ">
             <div class="text-left">
               <h1 class="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl">metacompress</h1>
-              <p class="mt-4 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
+              <p class="mt-2 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
                 Image conversion and compression run locally on your browser.
                 <span class="block text-xs font-bold">*dev testing. results are not guaranteed.*</span>
                 <span class="block text-xs font-bold">*png does not work well. use at your own discretion.*</span>
@@ -47,6 +47,18 @@
                                   <span class="label-text">JPEG</span>
                                 </label>
                             </div>
+                        </div>
+                      </div>
+                      <div class="field advanced hidden">
+                        <div class="row flex-row flex-nowrap gap-4">
+                          <label for="width">
+                            <span>Width:</span>
+                            <input id="width" wire:model="img_w" type="number" min="30" max="2000" step="10" />
+                          </label>
+                          <label for="height">
+                            <span>Height:</span>
+                            <input id="height" wire:model="img_h" type="number" min="30" max="2000" step="10" />
+                          </label>
                         </div>
                       </div>
                     </div>
