@@ -7,7 +7,7 @@
               <p class="mt-2 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
                 Image conversion and compression run locally on your browser.
                 <span class="block text-xs font-bold">*dev testing. results are not guaranteed.*</span>
-                <span class="block text-xs font-bold">*png does not work well. use at your own discretion.*</span>
+                <span class="block text-xs font-bold">*png does not work well. use at your own discretion!*</span>
               </p>
               <div class="mt-10 flex items-center justify-center gap-x-6">
                 <form wire:submit.prevent="compressImage" id="compress">
