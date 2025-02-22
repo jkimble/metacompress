@@ -1,19 +1,19 @@
 <div>
-    <div class="bg-slate-400">
-        <div class="relative isolate px-6 lg:px-8">
+    <div>
+        <div class="relative isolate px-6 lg:px-8 font-montserrat">
           <div class="mx-auto max-w-2xl py-12 ">
             <div class="text-left">
-              <h1 class="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl">metacompress</h1>
-              <p class="mt-2 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
+              <h1 class="text-5xl sm:text-7xl text-center font-semibold p-4 bg-primary rounded-sm">metacompress</h1>
+              <p class="mt-2 text-lg font-medium text-pretty text-primary sm:text-xl/8">
                 Image conversion and compression run locally on your browser.
                 <span class="block text-xs font-bold">*dev testing. results are not guaranteed.*</span>
                 <span class="block text-xs font-bold">*png does not work well. use at your own discretion!*</span>
               </p>
               <div class="mt-10 flex items-center justify-center gap-x-6">
-                <form wire:submit.prevent="compressImage" id="compress">
+                <form class="bg-base-200 p-4 border border-primary rounded-lg text-primary-content" wire:submit.prevent="compressImage" id="compress">
                     <div id="form_body">
                       <div class="field">
-                        <label for="file" class="block">Image Quality</label>
+                        <label for="file" class="block">Image</label>
                         <input type="file" wire:model="image" accept="image/*" id="file" class="file-input file-input-bordered cursor-pointer w-full">
                       </div>
                       <div class="field">

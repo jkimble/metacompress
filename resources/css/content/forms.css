@@ -5,10 +5,10 @@ form {
             @apply flex flex-col gap-4 mb-6;
             div.field {
                 label {
-                    @apply label justify-start gap-2 cursor-pointer !text-black;
+                    @apply label justify-start gap-2 cursor-pointer text-inherit;
                 }
                 span {
-                    @apply text-black;
+                    @apply text-inherit;
                 }
             }
         }
