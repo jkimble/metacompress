@@ -64,9 +64,6 @@ class Metacompress extends Component
     public function downloadImage()
     {
         if (!empty($this->image_loc)) {
-            // return response()->streamDownload(function () {
-            //     echo file_get_contents(storage_path('app/' . $this->image_loc));
-            // }, basename($this->image_loc));
             return response()->download($this->image_loc);
         }
 
