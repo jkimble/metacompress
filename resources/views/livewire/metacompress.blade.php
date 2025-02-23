@@ -16,10 +16,16 @@
                         <div class="field">
                             <label for="file" class="block">Image</label>
                             <input type="file" wire:model="image" accept="image/*" id="file" class="file-input file-input-primary file-input-bordered cursor-pointer w-full">
+                            @error('image')
+                              <span class="error">{{ $message }}</span>
+                            @enderror
                           </div>
                           <div class="field">
                             <label for="quality" class="block">Image Quality</label>
                             <input id="quality" wire:model='quality' type="number" class="input" min="0" placeholder="90%" />
+                            @error('quality')
+                              <span class="error">{{ $message }}</span>
+                            @enderror
                           </div>
                       </div>
                       <div class="field">
@@ -64,7 +70,12 @@
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="">Compress Image</button>
+                    <button type="submit">
+                      Compress Image
+                      <div wire:loading> 
+                        <span class="loading loading-spinner loading-xs"></span>
+                      </div>
+                    </button>
                 </form>
               </div>
             </div>

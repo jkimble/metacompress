@@ -9,6 +9,9 @@ form {
                 }
                 span {
                     @apply text-inherit;
+                    &.error {
+                        @apply block text-xs text-error italic mt-2;
+                    }
                 }
                 input {
                     @apply outline outline-1 outline-primary focus:outline-white focus:border-white border-none transition-all;

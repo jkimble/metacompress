@@ -11,6 +11,7 @@ class Metacompress extends Component
 {
     use WithFileUploads;
     public $image;
+    public $image_loc;
     public $size;
     public $quality;
     public $filetype;
@@ -61,6 +62,7 @@ class Metacompress extends Component
             //$image->save($compressedPath, $quality);
 
             return response()->download($compressedPath);
+            //$this->image_loc = $compressedPath;
         } else {
             session()->flash('error', 'No image uploaded.');
         }
