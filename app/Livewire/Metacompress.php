@@ -15,8 +15,6 @@ class Metacompress extends Component
     public $size;
     public $quality;
     public $filetype;
-    public $img_w;
-    public $img_h;
 
     public function render()
     {
@@ -42,6 +40,7 @@ class Metacompress extends Component
             $quality = !empty($this->quality) ? (int)$this->quality : 90;
             $inputFileType = !empty($this->filetype) ? $this->filetype : $clientFileType;
             $compressedPath = storage_path('app/public/' . $nameStripped . '.' . $inputFileType);
+            $this->image_loc = $compressedPath;
 
             switch ($inputFileType) {
                 case 'webp':
@@ -54,15 +53,12 @@ class Metacompress extends Component
                     $image->toJpeg($quality, progressive: true)->save($compressedPath); //saving needs better logic, ids
                     break;
                 default:
-                    $image->encodeByExtension(quality: $quality);
+                    $image->encodeByExtension($clientFileType, quality: $quality)->save($compressedPath);
                     break;
             }
             //$image->resize(200, 200);
             //$image->scaleDown(400, 300);
-            //$image->save($compressedPath, $quality);
-
-            return response()->download($compressedPath);
-            //$this->image_loc = $compressedPath;
+            //return response()->download($compressedPath);
         } else {
             session()->flash('error', 'No image uploaded.');
         }

@@ -14,7 +14,7 @@ form {
                     }
                 }
                 input {
-                    @apply outline outline-1 outline-primary focus:outline-white focus:border-white border-none transition-all;
+                    @apply max-w-full outline outline-1 outline-primary focus:outline-white focus:border-white border-none transition-all;
                     &[type="radio"] {
                         @apply w-[17px] h-[17px] bg-primary outline-2;
                         &:checked {
@@ -25,7 +25,7 @@ form {
             }
         }
         button[type="submit"] {
-            @apply btn btn-primary rounded-md transition-colors;
+            @apply btn btn-primary rounded-md transition-all;
         }
     }
 }

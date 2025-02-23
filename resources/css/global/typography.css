@@ -66,7 +66,3 @@
 #app {
     @apply font-montserrat;
 }
-
-h1 {
-    @apply !text-4xl !font-semibold  mb-4;
-}

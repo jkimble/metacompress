@@ -1,13 +1,13 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
-import forms from '@tailwindcss/forms';
-import daisyui from "daisyui"
+import defaultTheme from "tailwindcss/defaultTheme";
+import forms from "@tailwindcss/forms";
+import daisyui from "daisyui";
 
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
+        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+        "./storage/framework/views/*.php",
+        "./resources/views/**/*.blade.php",
         "./resources/**/*.js",
         "./resources/**/*.css",
     ],
@@ -18,7 +18,7 @@ export default {
                 montserrat: "Montserrat, serif",
                 merriweather: "Merriweather, serif",
                 icon: "'Font Awesome 6 Free'",
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ["Figtree", ...defaultTheme.fontFamily.sans],
             },
             margin: {
                 escape: "calc(-50vw + 50%)",
@@ -43,7 +43,7 @@ export default {
         themes: [
             {
                 kimbcode: {
-                    primary: "#1EB8A1",
+                    primary: "#117768",
                     "primary-focus": "#1E82B8",
                     "primary-content": "#ffffff",
 
