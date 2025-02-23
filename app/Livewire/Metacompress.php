@@ -4,7 +4,8 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Intervention\Image\ImageManager as Image;
+//use Intervention\Image\ImageManager as Image;
+use Intervention\Image\Laravel\Facades\Image;
 
 
 class Metacompress extends Component
