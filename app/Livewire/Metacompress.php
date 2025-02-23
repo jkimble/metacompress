@@ -30,12 +30,12 @@ class Metacompress extends Component
         $this->validate([
             'image' => 'required|image',
             'quality' => 'numeric|min:20|max:100',
-            'filetype' => 'required'
         ]);
 
         if ($this->image) {
             $path = $this->image->getRealPath();
-            $image = Image::gd()->read($path);
+            $image = Image::read($path);
+
 
             $this->ogHashStrip = $this->image->hashName();
             $this->ogFilename = $this->image->getClientOriginalName();
