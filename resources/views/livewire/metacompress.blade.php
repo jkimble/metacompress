@@ -12,17 +12,19 @@
               <div class="mt-10 flex items-center justify-center gap-x-6">
                 <form class="bg-base-200 p-4 border border-primary rounded-lg text-primary-content" wire:submit.prevent="compressImage" id="compress">
                     <div id="form_body">
-                      <div class="field">
-                        <label for="file" class="block">Image</label>
-                        <input type="file" wire:model="image" accept="image/*" id="file" class="file-input file-input-bordered cursor-pointer w-full">
-                      </div>
-                      <div class="field">
-                        <label for="quality" class="block">Image Quality</label>
-                        <input id="quality" wire:model='quality' type="number" class="input" placeholder="90%" />
+                      <div class="flex flex-row gap-6 justify-between">
+                        <div class="field">
+                            <label for="file" class="block">Image</label>
+                            <input type="file" wire:model="image" accept="image/*" id="file" class="file-input file-input-bordered cursor-pointer w-full">
+                          </div>
+                          <div class="field">
+                            <label for="quality" class="block">Image Quality</label>
+                            <input id="quality" wire:model='quality' type="number" class="input" min="0" placeholder="90%" />
+                          </div>
                       </div>
                       <div class="field">
                         <label>Convert Image To:</label>
-                        <div class="flex flex-col gap-2">
+                        <div class="flex flex-row gap-2">
                             <div class="form-control">
                                 <label>
                                   <input type="radio" value="same" wire:model='filetype' name="radio-type" class="radio" checked="checked" />
