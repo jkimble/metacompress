@@ -13,9 +13,12 @@ class Metacompress extends Component
     use WithFileUploads;
     public $image;
     public $image_loc;
-    public $size;
     public $quality;
     public $filetype;
+    public $ogFilename;
+    public $ogHashStrip;
+    public $extension;
+    public $conversion;
 
     public function render()
     {
@@ -33,15 +36,19 @@ class Metacompress extends Component
             $path = $this->image->getRealPath();
             $image = Image::gd()->read($path);
 
-            $clientFileName = $this->image->hashName();
-            $clientFileType = $this->image->extension();
-            $clientFileOGName = $this->image->getClientOriginalName();
-            $nameStripped = substr($clientFileOGName, 0, strrpos($clientFileOGName, '.'));
+            $this->ogHashStrip = $this->image->hashName();
+            $this->ogFilename = $this->image->getClientOriginalName();
+            $this->ogFilename = substr($this->ogFilename, 0, strrpos($this->ogFilename, '.'));
+            $this->ogHashStrip = substr($this->ogHashStrip, 0, strrpos($this->ogHashStrip, '.'));
+
+            $this->extension = $this->image->extension();
 
             $quality = !empty($this->quality) ? (int)$this->quality : 90;
-            $inputFileType = !empty($this->filetype) ? $this->filetype : $clientFileType;
-            $compressedPath = storage_path('app/public/' . $nameStripped . '.' . $inputFileType);
+            $inputFileType = !empty($this->filetype) ? $this->filetype : $this->extension;
+            $this->conversion = $inputFileType;
+            $compressedPath = storage_path('app/public/' . $this->ogHashStrip . '.' . $this->conversion);
             $this->image_loc = $compressedPath;
+
 
             switch ($inputFileType) {
                 case 'webp':
@@ -51,10 +58,10 @@ class Metacompress extends Component
                     $image->toPng(indexed: true)->save($compressedPath);
                     break;
                 case 'jpeg':
-                    $image->toJpeg($quality, progressive: true)->save($compressedPath); //saving needs better logic, ids
+                    $image->toJpeg($quality, progressive: true)->save($compressedPath);
                     break;
                 default:
-                    $image->encodeByExtension($clientFileType, quality: $quality)->save($compressedPath);
+                    $image->encodeByExtension($inputFileType, quality: $quality)->save($compressedPath);
                     break;
             }
         } else {
@@ -65,7 +72,7 @@ class Metacompress extends Component
     public function downloadImage()
     {
         if (!empty($this->image_loc)) {
-            return response()->download($this->image_loc);
+            return response()->download($this->image_loc, $this->ogFilename . '.' . $this->conversion)->deleteFileAfterSend();
         }
 
         session()->flash('error', 'No image found.');

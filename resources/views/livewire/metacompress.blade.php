@@ -32,7 +32,7 @@
                         <div class="flex flex-col sm:flex-row gap-2">
                             <div class="form-control">
                                 <label>
-                                  <input type="radio" wire:model='filetype' name="radio-type" class="radio" checked="checked" />
+                                  <input type="radio" value="" wire:model='filetype' name="radio-type" class="radio" checked="checked" />
                                   <span class="label-text">Leave as is</span>
                                 </label>
                             </div>
