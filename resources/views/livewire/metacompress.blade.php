@@ -10,12 +10,12 @@
                 <span class="block text-xs font-bold">*png does not work well. use at your own discretion!*</span>
               </p>
               <div class="mt-10 flex items-center justify-center gap-x-6">
-                <form class="bg-base-200 p-4 border border-primary rounded-lg text-primary-content" wire:submit.prevent="compressImage" id="compress">
+                <form class="bg-base-200 px-4 py-6 border border-primary rounded-lg text-primary-content" wire:submit.prevent="compressImage" id="compress">
                     <div id="form_body">
                       <div class="flex flex-row gap-6 justify-between">
                         <div class="field">
                             <label for="file" class="block">Image</label>
-                            <input type="file" wire:model="image" accept="image/*" id="file" class="file-input file-input-bordered cursor-pointer w-full">
+                            <input type="file" wire:model="image" accept="image/*" id="file" class="file-input file-input-primary file-input-bordered cursor-pointer w-full">
                           </div>
                           <div class="field">
                             <label for="quality" class="block">Image Quality</label>

@@ -11,9 +11,12 @@ form {
                     @apply text-inherit;
                 }
                 input {
-                    @apply outline outline-base-100 focus:outline-primary focus:border-primary border-none transition-all;
+                    @apply outline outline-1 outline-primary focus:outline-white focus:border-white border-none transition-all;
                     &[type="radio"] {
-                        @apply w-[17px] h-[17px] bg-white;
+                        @apply w-[17px] h-[17px] bg-primary outline-2;
+                        &:checked {
+                            @apply outline-primary;
+                        }
                     }
                 }
             }
