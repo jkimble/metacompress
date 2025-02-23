@@ -56,11 +56,20 @@ class Metacompress extends Component
                     $image->encodeByExtension($clientFileType, quality: $quality)->save($compressedPath);
                     break;
             }
-            //$image->resize(200, 200);
-            //$image->scaleDown(400, 300);
-            //return response()->download($compressedPath);
         } else {
             session()->flash('error', 'No image uploaded.');
         }
+    }
+
+    public function downloadImage()
+    {
+        if (!empty($this->image_loc)) {
+            // return response()->streamDownload(function () {
+            //     echo file_get_contents(storage_path('app/' . $this->image_loc));
+            // }, basename($this->image_loc));
+            return response()->download($this->image_loc);
+        }
+
+        session()->flash('error', 'No image found.');
     }
 }

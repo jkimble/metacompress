@@ -56,18 +56,6 @@
                             </div>
                         </div>
                       </div>
-                      <div class="field advanced hidden">
-                        <div class="row flex-row flex-nowrap gap-4">
-                          <label for="width">
-                            <span>Width:</span>
-                            <input id="width" wire:model="img_w" type="number" min="30" max="2000" step="10" />
-                          </label>
-                          <label for="height">
-                            <span>Height:</span>
-                            <input id="height" wire:model="img_h" type="number" min="30" max="2000" step="10" />
-                          </label>
-                        </div>
-                      </div>
                     </div>
                     <div class="flex flex-row gap-4">
                         <button type="submit">
@@ -77,7 +65,7 @@
                             </div>
                         </button>
                         @if($image_loc)
-                            <button class="btn btn-secondary border-2 border-secondary bg-transparent {{ !empty($image_loc) ? 'opacity-100' : 'opacity-0' }}">Download Image</button>
+                            <button wire:click='downloadImage' class="btn btn-secondary border-2 border-secondary bg-transparent {{ !empty($image_loc) ? 'opacity-100' : 'opacity-0' }}">Download Image</button>
                         @endif
                     </div>
                 </form>
