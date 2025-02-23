@@ -61,7 +61,7 @@
                       </div>
                     </div>
                     <div class="flex flex-row gap-4">
-                        <button type="submit" disabled>
+                        <button type="submit">
                             Compress Image
                             <div wire:loading>
                               <span class="loading loading-spinner loading-xs"></span>
