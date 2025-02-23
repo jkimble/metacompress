@@ -55,10 +55,13 @@
                                 </label>
                             </div>
                         </div>
+                        @error('filetype')
+                            <span class="error flex-[1_1_100%]">{{ $message }}</span>
+                        @enderror
                       </div>
                     </div>
                     <div class="flex flex-row gap-4">
-                        <button type="submit">
+                        <button type="submit" disabled>
                             Compress Image
                             <div wire:loading>
                               <span class="loading loading-spinner loading-xs"></span>
