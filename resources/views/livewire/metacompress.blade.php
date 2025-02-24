@@ -5,7 +5,7 @@
             <div class="text-left">
               <h1 class="text-2xl sm:text-4xl text-center font-semibold p-4 bg-primary rounded-sm">metacompress</h1>
               <p class="mt-2 text-lg font-medium text-pretty text-primary-content sm:text-xl/8">
-                Image conversion and compression run locally on your browser.
+                Image compression and conversion.
                 <span class="block text-xs font-bold">*dev testing. results are not guaranteed. use at your own discretion!*</span>
               </p>
               <div class="mt-6 flex items-center justify-center gap-x-6">
