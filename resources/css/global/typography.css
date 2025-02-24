@@ -66,3 +66,7 @@
 #app {
     @apply font-montserrat;
 }
+
+.link[active] {
+    @apply text-white;
+}

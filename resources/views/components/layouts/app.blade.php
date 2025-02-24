@@ -13,8 +13,8 @@
             <div class="mx-auto max-w-2xl px-6 lg:px-8 pb-8">
                 {{ $slot }}
                 <nav class="flex flex-row gap-4">
-                    <a class="link link-secondary" wire:navigate href="/" :active="request()->is('/')">Home</a>
-                    <a class="link link-secondary" wire:navigate href="/faqs" :active="request()->is('faqs')">FAQs</a>
+                    <a class="link link-secondary" wire:navigate href="/" :active="request()->routeIs('home')">Home</a>
+                    <a class="link link-secondary" wire:navigate href="/faqs" :active="request()->routeIs('faqs')">FAQs</a>
                 </nav>
             </div>
         </div>
