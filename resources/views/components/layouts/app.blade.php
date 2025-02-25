@@ -14,8 +14,15 @@
     <body>
         <div class="container mx-auto">
             <div class="mx-auto max-w-2xl px-6 lg:px-8 pb-8">
+                <div id="mc_hero" class="pt-8 md:pt-12 pb-8">
+                    <h1 class="text-2xl sm:text-4xl text-center font-semibold p-4 bg-primary rounded-sm">metacompress</h1>
+                    <p class="mt-2 text-lg font-medium text-pretty text-primary-content sm:text-xl/8">
+                        Image compression and conversion.
+                        <span class="block text-xs font-bold">*dev testing. results are not guaranteed. use at your own discretion!*</span>
+                    </p>
+                </div>
                 {{ $slot }}
-                <nav class="flex flex-row gap-4">
+                <nav class="flex flex-row gap-4 mt-2">
                     <a class="link link-secondary" wire:navigate href="/">Home</a>
                     <a class="link link-secondary" wire:navigate href="/faqs">FAQs</a>
                 </nav>

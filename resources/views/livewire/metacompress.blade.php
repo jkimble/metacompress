@@ -1,14 +1,9 @@
 <div>
     <div>
         <div class="relative isolate font-montserrat">
-          <div class="pt-12 pb-2">
+          <div>
             <div class="text-left">
-              <h1 class="text-2xl sm:text-4xl text-center font-semibold p-4 bg-primary rounded-sm">metacompress</h1>
-              <p class="mt-2 text-lg font-medium text-pretty text-primary-content sm:text-xl/8">
-                Image compression and conversion.
-                <span class="block text-xs font-bold">*dev testing. results are not guaranteed. use at your own discretion!*</span>
-              </p>
-              <div class="mt-6 flex items-center justify-center gap-x-6">
+              <div class="flex items-center justify-center gap-x-6">
                 <form class="bg-base-200 px-4 py-6 border border-primary rounded-lg text-primary-content" wire:submit.prevent="compressImage" id="compress">
                   <div id="form_body">
                     <div class="flex flex-col md:flex-row gap-6 justify-between">
