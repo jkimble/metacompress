@@ -15,7 +15,7 @@ class Metacompress extends Component
 {
     use WithFileUploads;
     public $image;
-    public $image_loc;
+    public $imgPath;
     public $quality;
     public $filetype;
     public $ogFilename;
@@ -38,34 +38,34 @@ class Metacompress extends Component
 
         if ($this->image) {
             $path = $this->image->getRealPath();
-            $image = Image::read($path);
+            $newImg = Image::read($path);
 
 
-            $this->ogHashStrip = $this->image->hashName();
-            $this->ogFilename = $this->image->getClientOriginalName();
-            $this->ogFilename = substr($this->ogFilename, 0, strrpos($this->ogFilename, '.'));
-            $this->ogHashStrip = substr($this->ogHashStrip, 0, strrpos($this->ogHashStrip, '.'));
+            $hash = $this->image->hashName();
+            $clientName = htmlspecialchars($this->image->getClientOriginalName(), ENT_SUBSTITUTE|ENT_QUOTES);
+            $extension = $this->image->extension();
+            $this->ogFilename = substr($clientName, 0, strrpos($clientName, '.'));
+            $this->ogHashStrip = substr($hash, 0, strrpos($hash, '.'));
 
-            $this->extension = $this->image->extension();
 
             $quality = !empty($this->quality) ? (int)$this->quality : 90;
-            $inputFileType = !empty($this->filetype) ? $this->filetype : $this->extension;
-            $this->conversion = $inputFileType;
-            $compressedPath = $this->ogFilename . '.' . $inputFileType;
-            $this->image_loc = $compressedPath;
+            $this->conversion = !empty($this->filetype) ? $this->filetype : $extension;
+            $imgPath = $this->ogHashStrip . '.' . $this->conversion;
 
 
-            switch ($inputFileType) {
+            switch ($this->conversion) {
                 case 'webp':
-                    Storage::disk('public')->put($compressedPath, $image->toWebp($quality));
+                    Storage::disk('public')->put($imgPath, $newImg->toWebp($quality));
                     break;
                 case 'jpeg':
-                    Storage::disk('public')->put($compressedPath, $image->toJpeg($quality, progressive: true));
+                    Storage::disk('public')->put($imgPath, $newImg->toJpeg($quality, progressive: true));
                     break;
                 default:
-                    Storage::disk('public')->put($compressedPath, $image->encodeByExtension($inputFileType, quality: $quality));
+                    Storage::disk('public')->put($imgPath, $newImg->encodeByExtension($this->conversion, quality: $quality));
                     break;
             }
+
+            $this->imgPath = $imgPath;
         } else {
             session()->flash('error', 'No image uploaded.');
         }
@@ -73,10 +73,10 @@ class Metacompress extends Component
 
     public function downloadImage()
     {
-        if (!empty($this->image_loc)) {
+        if (!empty($this->imgPath)) {
             $this->downloaded = true;
             File::cleanDirectory(Storage::disk('local')->path('livewire-tmp'));
-            return Response::download(Storage::disk('public')->path($this->image_loc), $this->ogFilename . '.' . $this->conversion)->deleteFileAfterSend(true);
+            return Response::download(Storage::disk('public')->path($this->imgPath), $this->ogFilename . '.' . $this->conversion)->deleteFileAfterSend(true);
         }
 
         session()->flash('error', 'No image found.');
@@ -84,8 +84,8 @@ class Metacompress extends Component
 
     public function deleteImage()
     {
-        if (Storage::disk('public')->exists($this->image_loc)) {
-            Storage::disk('public')->delete($this->image_loc);
+        if (Storage::disk('public')->exists($this->imgPath)) {
+            Storage::disk('public')->delete($this->imgPath);
         }
 
         if (!File::isEmptyDirectory(Storage::disk('local')->path('livewire-tmp'))) {
