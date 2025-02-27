@@ -60,6 +60,9 @@ class Metacompress extends Component
                 case 'jpeg':
                     Storage::disk('public')->put($imgPath, $newImg->toJpeg($quality, progressive: true));
                     break;
+                case 'avif':
+                    Storage::disk('public')->put($imgPath, $newImg->toAvif($quality));
+                    break;
                 default:
                     Storage::disk('public')->put($imgPath, $newImg->encodeByExtension($this->conversion, quality: $quality));
                     break;

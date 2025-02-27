@@ -38,6 +38,12 @@
                                     </div>
                                     <div class="form-control">
                                         <label>
+                                            <input type="radio" value="avif" wire:model='filetype' name="radio-type" class="radio" />
+                                            <span class="label-text">Avif</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-control">
+                                        <label>
                                             <input type="radio" value="jpeg" wire:model='filetype' name="radio-type" class="radio" />
                                             <span class="label-text">JPEG</span>
                                         </label>
