@@ -2,6 +2,9 @@
 
 namespace App\Livewire;
 
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 //use Intervention\Image\ImageManager as Image;
@@ -19,6 +22,7 @@ class Metacompress extends Component
     public $ogHashStrip;
     public $extension;
     public $conversion;
+    public $downloaded = false;
 
     public function render()
     {
@@ -47,22 +51,19 @@ class Metacompress extends Component
             $quality = !empty($this->quality) ? (int)$this->quality : 90;
             $inputFileType = !empty($this->filetype) ? $this->filetype : $this->extension;
             $this->conversion = $inputFileType;
-            $compressedPath = storage_path('app/public/' . $this->ogHashStrip . '.' . $this->conversion);
+            $compressedPath = $this->ogFilename . '.' . $inputFileType;
             $this->image_loc = $compressedPath;
 
 
             switch ($inputFileType) {
                 case 'webp':
-                    $image->toWebp($quality)->save($compressedPath);
-                    break;
-                case 'png':
-                    $image->toPng(indexed: true)->save($compressedPath);
+                    Storage::disk('public')->put($compressedPath, $image->toWebp($quality));
                     break;
                 case 'jpeg':
-                    $image->toJpeg($quality, progressive: true)->save($compressedPath);
+                    Storage::disk('public')->put($compressedPath, $image->toJpeg($quality, progressive: true));
                     break;
                 default:
-                    $image->encodeByExtension($inputFileType, quality: $quality)->save($compressedPath);
+                    Storage::disk('public')->put($compressedPath, $image->encodeByExtension($inputFileType, quality: $quality));
                     break;
             }
         } else {
@@ -73,9 +74,22 @@ class Metacompress extends Component
     public function downloadImage()
     {
         if (!empty($this->image_loc)) {
-            return response()->download($this->image_loc, $this->ogFilename . '.' . $this->conversion)->deleteFileAfterSend();
+            $this->downloaded = true;
+            File::cleanDirectory(Storage::disk('local')->path('livewire-tmp'));
+            return Response::download(Storage::disk('public')->path($this->image_loc), $this->ogFilename . '.' . $this->conversion)->deleteFileAfterSend(true);
         }
 
         session()->flash('error', 'No image found.');
+    }
+
+    public function deleteImage()
+    {
+        if (Storage::disk('public')->exists($this->image_loc)) {
+            Storage::disk('public')->delete($this->image_loc);
+        }
+
+        if (!File::isEmptyDirectory(Storage::disk('local')->path('livewire-tmp'))) {
+            File::cleanDirectory(Storage::disk('local')->path('livewire-tmp'));
+        }
     }
 }

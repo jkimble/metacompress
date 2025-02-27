@@ -39,12 +39,6 @@
                           </div>
                           <div class="form-control">
                               <label>
-                                <input type="radio" value="png" wire:model='filetype' name="radio-type" class="radio" />
-                                <span class="label-text">PNG</span>
-                              </label>
-                          </div>
-                          <div class="form-control">
-                              <label>
                                 <input type="radio" value="jpeg" wire:model='filetype' name="radio-type" class="radio" />
                                 <span class="label-text">JPEG</span>
                               </label>
@@ -56,18 +50,20 @@
                     </div>
                   </div>
                   <div class="flex flex-row gap-4">
-                      <button type="submit">
-                          Compress Image
-                          <div wire:loading>
-                            <span class="loading loading-spinner loading-xs"></span>
-                          </div>
-                      </button>
-                      @if($image_loc)
-                          <button wire:click='downloadImage' class="btn btn-secondary border-2 border-secondary bg-transparent {{ !empty($image_loc) ? 'opacity-100' : 'opacity-0' }}">Download Image</button>
-                      @endif
-                  </div>
+                    <button type="submit">
+                        Compress Image
+                        <div wire:loading>
+                        <span class="loading loading-spinner loading-xs"></span>
+                        </div>
+                    </button>
+                </div>
                 </form>
               </div>
+                <div class="flex flex-row gap-4">
+                    @if($image_loc)
+                        <button wire:click='downloadImage' class="btn btn-secondary border-2 border-secondary bg-transparent {{ !empty($image_loc) ? 'opacity-100' : 'opacity-0' }}">Download Image</button>
+                    @endif
+                </div>
             </div>
           </div>
         </div>
