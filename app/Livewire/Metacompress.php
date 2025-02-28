@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-//use Intervention\Image\ImageManager as Image;
 use Intervention\Image\Laravel\Facades\Image;
 
 
@@ -23,6 +22,7 @@ class Metacompress extends Component
     public $extension;
     public $conversion;
     public $downloaded = false;
+    public $name_f;
 
     public function render()
     {
@@ -31,18 +31,20 @@ class Metacompress extends Component
 
     public function compressImage()
     {
+
         $this->validate([
-            'image' => 'required|image',
+            'image' => 'required|image|max:5000|mimes:png,jpg,jpeg,webp,avif',
             'quality' => 'numeric|min:20|max:100',
+            'name_f' => 'prohibited'
         ]);
 
-        if ($this->image) {
+        if ($this->image && empty($this->name_f)) {
             $path = $this->image->getRealPath();
             $newImg = Image::read($path);
 
 
             $hash = $this->image->hashName();
-            $clientName = htmlspecialchars($this->image->getClientOriginalName(), ENT_SUBSTITUTE|ENT_QUOTES);
+            $clientName = htmlspecialchars($this->image->getClientOriginalName(), ENT_SUBSTITUTE | ENT_QUOTES);
             $extension = $this->image->extension();
             $this->ogFilename = substr($clientName, 0, strrpos($clientName, '.'));
             $this->ogHashStrip = substr($hash, 0, strrpos($hash, '.'));

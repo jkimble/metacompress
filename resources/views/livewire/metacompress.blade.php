@@ -49,9 +49,10 @@
                                         </label>
                                     </div>
                                 </div>
-                                @error('filetype')
-                                <span class="error flex-[1_1_100%]">{{ $message }}</span>
-                                @enderror
+                            </div>
+                            <div class="field hidden">
+                                <label for="name" class="block">Name</label>
+                                <input id="name" wire:model='name_f' type="text" class="input hidden" />
                             </div>
                         </div>
                         <div class="flex flex-col gap-4">
