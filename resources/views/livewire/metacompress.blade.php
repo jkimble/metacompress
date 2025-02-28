@@ -55,20 +55,21 @@
                                 <input id="name" wire:model='name_f' type="text" class="input hidden" />
                             </div>
                         </div>
-                        <div class="flex flex-col gap-4">
-                            <button type="submit" class="w-fit">
+                        <div class="flex flex-row items-center gap-4">
+                            <button type="submit" class="w-fit" {{ $imgPath ? 'disabled' : '' }}>
                                 Compress Image
-                                <div wire:loading>
-                                    <span class="loading loading-spinner loading-xs"></span>
-                                </div>
                             </button>
+                            <div wire:loading>
+                                <span class="loading loading-spinner loading-xs"></span>
+                            </div>
                         </div>
                     </form>
                 </div>
-                <div class="flex flex-row gap-4">
+                <div class="flex flex-col gap-4 mt-4">
                     @if($imgPath)
-                    <button wire:click='downloadImage' class="btn btn-secondary border-2 border-secondary bg-transparent {{ !empty($imgPath) ? 'opacity-100' : 'opacity-0' }}">Download Image</button>
+                    <button wire:click='downloadImage' class="btn btn-secondary border-2 border-secondary bg-transparent w-fit {{ $imgPath ? 'opacity-100' : 'opacity-0' }}" {{ $downloaded ? 'disabled' : '' }}>Download Image</button>
                     @endif
+                    {!! $downloaded ? '<p>' . 'Image downloaded and deleted! Thank you!' . '</p>' : '' !!}
                 </div>
             </div>
         </div>

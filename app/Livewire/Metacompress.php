@@ -39,8 +39,7 @@ class Metacompress extends Component
         ]);
 
         if ($this->image && empty($this->name_f)) {
-            $path = $this->image->getRealPath();
-            $newImg = Image::read($path);
+            $newImg = Image::read($this->image->getRealPath());
 
 
             $hash = $this->image->hashName();
