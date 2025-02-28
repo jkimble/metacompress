@@ -28,4 +28,7 @@ form {
             @apply btn btn-primary rounded-md transition-all;
         }
     }
+    div.h-captcha {
+        @apply bg-transparent;
+    }
 }

@@ -54,8 +54,9 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="flex flex-row gap-4">
-                            <button type="submit">
+                        <div class="flex flex-col gap-4">
+                            {!! HCaptcha::display(['data-theme' => 'dark']) !!}
+                            <button type="submit" class="w-fit">
                                 Compress Image
                                 <div wire:loading>
                                     <span class="loading loading-spinner loading-xs"></span>
