@@ -55,7 +55,6 @@
                             </div>
                         </div>
                         <div class="flex flex-col gap-4">
-                            {!! HCaptcha::display(['data-theme' => 'dark']) !!}
                             <button type="submit" class="w-fit">
                                 Compress Image
                                 <div wire:loading>
