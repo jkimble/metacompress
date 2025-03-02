@@ -5,14 +5,14 @@
                 <div class="flex flex-col md:flex-row gap-6 justify-between">
                     <div class="field">
                         <label for="file" class="block">Image</label>
-                        <input type="file" wire:model="image" accept="image/*" id="file" class="file-input file-input-primary file-input-bordered cursor-pointer w-full">
+                        <input type="file" wire:model.blur="image" accept="image/*" id="file" class="file-input file-input-primary file-input-bordered cursor-pointer w-full">
                         @error('image')
                         <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="field">
                         <label for="quality" class="block">Image Quality</label>
-                        <input id="quality" wire:model='quality' type="number" class="input" min="0" placeholder="90%" />
+                        <input id="quality" wire:model.blur='quality' type="number" class="input" placeholder="90%" />
                         @error('quality')
                         <span class="error">{{ $message }}</span>
                         @enderror

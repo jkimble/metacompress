@@ -2,12 +2,15 @@
 
 namespace App\Livewire;
 
+use Livewire\Component;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-use Livewire\Component;
-use Livewire\WithFileUploads;
 use Intervention\Image\Laravel\Facades\Image;
+
+use Livewire\Attributes\Validate;
+use Illuminate\Validation\Rule;
 
 
 class Metacompress extends Component
@@ -29,12 +32,26 @@ class Metacompress extends Component
         return view('livewire.metacompress');
     }
 
+    public $rules = [
+        'quality' => 'required|numeric|min:10|max:100',
+        'image' => 'required|file|image|max:2000|mimes:png,jpg,jpeg,webp,avif|extensions:png,jpg,jpeg,webp,avif',
+    ];
+
+    public function updatedQuality()
+    {
+        $this->validateOnly('quality');
+    }
+
+    public function updatedImage() {
+        $this->validateOnly('image');
+    }
+
     public function compressImage()
     {
 
         $this->validate([
-            'image' => 'required|image|max:5000|mimes:png,jpg,jpeg,webp,avif',
-            'quality' => 'numeric|min:20|max:100',
+            'image' => 'required|image|max:2000|mimes:png,jpg,jpeg,webp,avif',
+            'quality' => 'required|numeric|min:10|max:100',
             'name_f' => 'prohibited'
         ]);
 
@@ -69,7 +86,7 @@ class Metacompress extends Component
 
             $this->imgPath = $imgPath;
         } else {
-            session()->flash('error', 'No image uploaded.');
+            $this->addError('image', 'The uploaded file exceeds the max allowed size of 5MB.');
         }
     }
 
@@ -78,7 +95,7 @@ class Metacompress extends Component
         if (!empty($this->imgPath)) {
             $this->downloaded = true;
             File::delete($this->image->getRealPath());
-            return Response::download(Storage::path($this->imgPath), $this->ogFilename . '.' . $this->conversion)->deleteFileAfterSend(true);
+            return Response::download(Storage::path($this->imgPath), $this->ogFilename . '.' . $this->conversion)->deleteFileAfterSend();
         }
 
         session()->flash('error', 'No image found.');
