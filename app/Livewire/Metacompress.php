@@ -87,6 +87,9 @@ class Metacompress extends Component
                 case 'tiff':
                     Storage::put($imgPath, $newImg->toTiff($quality));
                     break;
+                case 'avif':
+                    Storage::put($imgPath, $newImg->toTiff($quality));
+                    break;
                 case 'png':
                     Storage::put($imgPath, $newImg->toPng(indexed: true));
                     break;

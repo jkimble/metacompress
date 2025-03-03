@@ -42,6 +42,12 @@
                         </div>
                         <div class="form-control">
                             <label>
+                                <input type="radio" value="avif" wire:model='filetype' name="radio-type" class="radio" />
+                                <span class="label-text">AVIF</span>
+                            </label>
+                        </div>
+                        <div class="form-control">
+                            <label>
                                 <input type="radio" value="tiff" wire:model='filetype' name="radio-type" class="radio" />
                                 <span class="label-text">TIFF</span>
                             </label>
@@ -71,5 +77,5 @@
         <button wire:click='downloadImage' class="btn btn-secondary border-2 border-secondary bg-transparent w-fit {{ $imgPath ? 'opacity-100' : 'opacity-0' }}" {{ $downloaded ? 'disabled' : '' }}>Download Image</button>
         @endif
     </div>
+</div>
 
-@endphp
