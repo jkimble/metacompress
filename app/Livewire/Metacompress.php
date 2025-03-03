@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Laravel\Facades\Image;
-
-use Livewire\Attributes\Validate;
-use Illuminate\Validation\Rule;
+use Livewire\Attributes\On;
 
 
 class Metacompress extends Component
@@ -24,17 +22,26 @@ class Metacompress extends Component
     public $ogHashStrip;
     public $extension;
     public $conversion;
-    public $downloaded = false;
+    public $downloaded;
     public $name_f;
+    public $alert;
+    public $result;
 
     public function render()
     {
         return view('livewire.metacompress');
     }
 
+    // #[On('imageResult')]
+    // public function updateAlert($result)
+    // {
+    //     $this->alert = true;
+    //     $this->result = $result;
+    // }
+
     public $rules = [
         'quality' => 'required|numeric|min:10|max:100',
-        'image' => 'required|file|image|max:2000|mimes:png,jpg,jpeg,webp,avif|extensions:png,jpg,jpeg,webp,avif',
+        'image' => 'required|file|image|max:5000|mimes:png,jpg,jpeg,webp,tiff|extensions:png,jpg,jpeg,webp,tiff',
     ];
 
     public function updatedQuality()
@@ -42,15 +49,16 @@ class Metacompress extends Component
         $this->validateOnly('quality');
     }
 
-    public function updatedImage() {
+    public function updatedImage()
+    {
         $this->validateOnly('image');
     }
 
     public function compressImage()
     {
-
+        $this->dispatch('showElement');
         $this->validate([
-            'image' => 'required|image|max:2000|mimes:png,jpg,jpeg,webp,avif',
+            'image' => 'required|image|max:5000|mimes:png,jpg,jpeg,webp,tiff',
             'quality' => 'required|numeric|min:10|max:100',
             'name_f' => 'prohibited'
         ]);
@@ -76,11 +84,14 @@ class Metacompress extends Component
                 case 'jpeg':
                     Storage::put($imgPath, $newImg->toJpeg($quality, progressive: true));
                     break;
-                case 'avif':
-                    Storage::put($imgPath, $newImg->toAvif($quality));
+                case 'tiff':
+                    Storage::put($imgPath, $newImg->toTiff($quality));
+                    break;
+                case 'png':
+                    Storage::put($imgPath, $newImg->toPng(indexed: true));
                     break;
                 default:
-                    Storage::put($imgPath, $newImg->encodeByExtension($this->conversion, quality: $quality));
+                    Storage::put($imgPath, $newImg->encodeByExtension($this->conversion));
                     break;
             }
 
@@ -95,6 +106,8 @@ class Metacompress extends Component
         if (!empty($this->imgPath)) {
             $this->downloaded = true;
             File::delete($this->image->getRealPath());
+            //$this->dispatch('imageResult', result: 'success');
+            //$this->dispatch('showAlert');
             return Response::download(Storage::path($this->imgPath), $this->ogFilename . '.' . $this->conversion)->deleteFileAfterSend();
         }
 

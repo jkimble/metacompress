@@ -5,7 +5,8 @@
                 <div class="flex flex-col md:flex-row gap-6 justify-between">
                     <div class="field">
                         <label for="file" class="block">Image</label>
-                        <input type="file" wire:model.blur="image" accept="image/*" id="file" class="file-input file-input-primary file-input-bordered cursor-pointer w-full">
+                        <input type="file" wire:model.blur="image" accept=".png,.jpg,.jpeg,.webp,.tiff" max="100" min="10" id="file" class="file-input file-input-primary file-input-bordered cursor-pointer w-full">
+                        <span class="text-xs label-text text-white">Accepted filetypes: png, jpg, jpeg, webp</span>
                         @error('image')
                         <span class="error">{{ $message }}</span>
                         @enderror
@@ -35,17 +36,20 @@
                         </div>
                         <div class="form-control">
                             <label>
-                                <input type="radio" value="avif" wire:model='filetype' name="radio-type" class="radio" />
-                                <span class="label-text">Avif</span>
-                            </label>
-                        </div>
-                        <div class="form-control">
-                            <label>
                                 <input type="radio" value="jpeg" wire:model='filetype' name="radio-type" class="radio" />
                                 <span class="label-text">JPEG</span>
                             </label>
                         </div>
+                        <div class="form-control">
+                            <label>
+                                <input type="radio" value="tiff" wire:model='filetype' name="radio-type" class="radio" />
+                                <span class="label-text">TIFF</span>
+                            </label>
+                        </div>
                     </div>
+                    @error('filetype')
+                    <span class="error">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="field hidden">
                     <label for="name" class="block">Name</label>
@@ -66,6 +70,6 @@
         @if($imgPath)
         <button wire:click='downloadImage' class="btn btn-secondary border-2 border-secondary bg-transparent w-fit {{ $imgPath ? 'opacity-100' : 'opacity-0' }}" {{ $downloaded ? 'disabled' : '' }}>Download Image</button>
         @endif
-        {!! $downloaded ? '<p>' . 'Image downloaded and deleted! Thank you!' . '</p>' : '' !!}
     </div>
-</div>
+
+@endphp

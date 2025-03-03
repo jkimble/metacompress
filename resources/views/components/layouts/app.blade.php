@@ -23,8 +23,8 @@
                 </div>
                 {{ $slot }}
                 <nav class="flex flex-row gap-4 mt-2">
-                    <a class="link link-secondary" wire:navigate href="/">Home</a>
-                    <a class="link link-secondary" wire:navigate href="/faqs">FAQs</a>
+                    <a class="link link-secondary" wire:navigate.hover href="/">Home</a>
+                    <a class="link link-secondary" wire:navigate.hover href="/faqs">FAQs</a>
                 </nav>
             </div>
         </div>
