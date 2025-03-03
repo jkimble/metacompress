@@ -87,9 +87,6 @@ class Metacompress extends Component
                 case 'tiff':
                     Storage::put($imgPath, $newImg->toTiff($quality));
                     break;
-                case 'avif':
-                    Storage::put($imgPath, $newImg->toAvif($quality));
-                    break;
                 case 'png':
                     Storage::put($imgPath, $newImg->toPng(indexed: true));
                     break;
@@ -99,8 +96,13 @@ class Metacompress extends Component
             }
 
             $this->imgPath = $imgPath;
+
+            if (Storage::fileSize($imgPath) >= $this->image->getSize()) { // catch new image larger than OG
+
+            }
+
         } else {
-            $this->addError('image', 'The uploaded file exceeds the max allowed size of 5MB.');
+            $this->addError('image', 'There was an issue uploading this image.');
         }
     }
 
