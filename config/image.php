@@ -1,5 +1,5 @@
 <?php
-
+$driver = env('APP_ENV') == 'production' ? \Intervention\Image\Drivers\Imagick\Driver::class : \Intervention\Image\Drivers\Gd\Driver::class;
 return [
 
     /*
@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'driver' => \Intervention\Image\Drivers\Imagick\Driver::class,
+    'driver' => $driver,
 
     /*
     |--------------------------------------------------------------------------

@@ -58,7 +58,7 @@ class Metacompress extends Component
     {
         $this->dispatch('showElement');
         $this->validate([
-            'image' => 'required|image|max:5000|mimes:png,jpg,jpeg,webp,tiff',
+            'image' => 'required|image|max:5000',
             'quality' => 'required|numeric|min:10|max:100',
             'name_f' => 'prohibited'
         ]);
