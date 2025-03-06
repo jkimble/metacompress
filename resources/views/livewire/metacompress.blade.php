@@ -6,7 +6,7 @@
                     <div class="field">
                         <label for="file" class="block">Image</label>
                         <input type="file" wire:model.blur="image" accept=".png,.jpg,.jpeg,.webp,.tiff" max="100" min="10" id="file" class="file-input file-input-primary file-input-bordered cursor-pointer w-full mb-1">
-                        <span class="block text-xs label-text text-white mb-1">Accepted file types: png, jpg, jpeg, webp</span>
+                        <span class="block text-xs label-text text-white mb-1">Accepted file types: png, jpg, jpeg, webp, tiff</span>
                         <span class="block text-xs label-text text-white">Max file size: 5MB</span>
                         @error('image')
                         <span class="error">{{ $message }}</span>
@@ -70,6 +70,10 @@
     <div class="flex flex-col gap-4 mt-4">
         @if($imgPath)
         <button wire:click='downloadImage' class="btn btn-secondary border-2 border-secondary bg-transparent w-fit {{ $imgPath ? 'opacity-100' : 'opacity-0' }}" {{ $downloaded ? 'disabled' : '' }}>Download Image</button>
+        @endif
+
+        @if($downloaded)
+        <button wire:click='resetForm' class="btn btn-primary border-2 border-primary w-fit">Convert another image</button>
         @endif
     </div>
 </div>

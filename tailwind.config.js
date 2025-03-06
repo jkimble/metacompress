@@ -10,6 +10,7 @@ export default {
         "./resources/views/**/*.blade.php",
         "./resources/**/*.js",
         "./resources/**/*.css",
+        "./vendor/masmerise/livewire-toaster/resources/views/*.blade.php",
     ],
 
     theme: {

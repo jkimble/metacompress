@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Laravel\Facades\Image;
-use Livewire\Attributes\On;
-
+use Masmerise\Toaster\Toaster;
+use Masmerise\Toaster\ToasterHub;
 
 class Metacompress extends Component
 {
@@ -32,33 +32,10 @@ class Metacompress extends Component
         return view('livewire.metacompress');
     }
 
-    #[On('imageResult')]
-    public function updateAlert($result, $cause = null)
-    {
-        $this->alert = true;
-        $this->result = $result;
-    }
-
-    public $rules = [
-        'quality' => 'required|numeric|min:10|max:100',
-        'image' => 'required|file|image|max:5000|mimes:png,jpg,jpeg,webp,tiff|extensions:png,jpg,jpeg,webp,tiff',
-    ];
-
-    public function updatedQuality()
-    {
-        $this->validateOnly('quality');
-    }
-
-    public function updatedImage()
-    {
-        $this->validateOnly('image');
-    }
-
     public function compressImage()
     {
-        $this->dispatch('showElement');
         $this->validate([
-            'image' => 'required|image|max:5000',
+            'image' => 'required|image|file|max:5000|mimes:png,jpg,jpeg,webp,tiff|extensions:png,jpg,jpeg,webp,tiff',
             'quality' => 'required|numeric|min:10|max:100',
             'name_f' => 'prohibited'
         ]);
@@ -101,11 +78,10 @@ class Metacompress extends Component
                 File::delete($this->image->getRealPath());
                 Storage::delete($imgPath);
                 $this->reset();
-                $this->dispatch('imageResult', result: 'invalid', cause: 'enlarged');
+                Toaster::error('New image larger than original. Both images have been deleted.');
             }
-
         } else {
-            $this->addError('image', 'There was an issue uploading this image.');
+            Toaster::error('There was an issue uploading this image.');
         }
     }
 
@@ -114,11 +90,13 @@ class Metacompress extends Component
         if (!empty($this->imgPath)) {
             $this->downloaded = true;
             File::delete($this->image->getRealPath());
-            $this->dispatch('imageResult', result: 'success');
-            //$this->dispatch('showAlert');
+            Toaster::success('Image compressed!');
             return Response::download(Storage::path($this->imgPath), $this->ogFilename . '.' . $this->conversion)->deleteFileAfterSend();
         }
+        Toaster::error('No image found.');
+    }
 
-        session()->flash('error', 'No image found.');
+    public function resetForm() {
+        $this->reset();
     }
 }
