@@ -32,12 +32,12 @@ class Metacompress extends Component
         return view('livewire.metacompress');
     }
 
-    // #[On('imageResult')]
-    // public function updateAlert($result)
-    // {
-    //     $this->alert = true;
-    //     $this->result = $result;
-    // }
+    #[On('imageResult')]
+    public function updateAlert($result, $cause = null)
+    {
+        $this->alert = true;
+        $this->result = $result;
+    }
 
     public $rules = [
         'quality' => 'required|numeric|min:10|max:100',
@@ -97,8 +97,11 @@ class Metacompress extends Component
 
             $this->imgPath = $imgPath;
 
-            if (Storage::fileSize($imgPath) >= $this->image->getSize()) { // catch new image larger than OG
-
+            if (Storage::fileSize($imgPath) >= $this->image->getSize()) {
+                File::delete($this->image->getRealPath());
+                Storage::delete($imgPath);
+                $this->reset();
+                $this->dispatch('imageResult', result: 'invalid', cause: 'enlarged');
             }
 
         } else {
@@ -111,7 +114,7 @@ class Metacompress extends Component
         if (!empty($this->imgPath)) {
             $this->downloaded = true;
             File::delete($this->image->getRealPath());
-            //$this->dispatch('imageResult', result: 'success');
+            $this->dispatch('imageResult', result: 'success');
             //$this->dispatch('showAlert');
             return Response::download(Storage::path($this->imgPath), $this->ogFilename . '.' . $this->conversion)->deleteFileAfterSend();
         }

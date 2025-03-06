@@ -5,8 +5,9 @@
                 <div class="flex flex-col md:flex-row gap-6 justify-between">
                     <div class="field">
                         <label for="file" class="block">Image</label>
-                        <input type="file" wire:model.blur="image" accept=".png,.jpg,.jpeg,.webp,.tiff" max="100" min="10" id="file" class="file-input file-input-primary file-input-bordered cursor-pointer w-full">
-                        <span class="text-xs label-text text-white">Accepted filetypes: png, jpg, jpeg, webp</span>
+                        <input type="file" wire:model.blur="image" accept=".png,.jpg,.jpeg,.webp,.tiff" max="100" min="10" id="file" class="file-input file-input-primary file-input-bordered cursor-pointer w-full mb-1">
+                        <span class="block text-xs label-text text-white mb-1">Accepted file types: png, jpg, jpeg, webp</span>
+                        <span class="block text-xs label-text text-white">Max file size: 5MB</span>
                         @error('image')
                         <span class="error">{{ $message }}</span>
                         @enderror
@@ -72,4 +73,3 @@
         @endif
     </div>
 </div>
-
