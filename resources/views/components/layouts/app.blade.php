@@ -18,7 +18,7 @@
                 <h1 class="text-2xl sm:text-4xl text-center font-semibold p-4 bg-primary text-white rounded-sm">metacompress</h1>
                 <p class="mt-2 text-lg font-medium text-pretty text-primary-content sm:text-xl/8">
                     Image compression and conversion.
-                    <span class="block text-xs font-bold">*dev testing. results are not guaranteed. use at your own discretion!*</span>
+                    <span class="block text-xs font-bold">*for personal use and testing. results are not guaranteed. use at your own discretion.*</span>
                 </p>
             </div>
             {{ $slot }}
