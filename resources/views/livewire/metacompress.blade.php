@@ -47,6 +47,12 @@
                                 <span class="label-text">TIFF</span>
                             </label>
                         </div>
+                        <div class="form-control">
+                            <label>
+                                <input type="radio" value="tiff" wire:model='filetype' name="radio-type" class="radio" />
+                                <span class="label-text">AVIF</span>
+                            </label>
+                        </div>
                     </div>
                     @error('filetype')
                     <span class="error">{{ $message }}</span>
