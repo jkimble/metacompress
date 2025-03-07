@@ -67,7 +67,7 @@ class Metacompress extends Component
                 case 'png':
                     Storage::put($imgPath, $newImg->toPng(indexed: true));
                     break;
-                case 'png':
+                case 'avif':
                     Storage::put($imgPath, $newImg->toAvif($quality));
                     break;
                 default:
