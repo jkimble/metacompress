@@ -70,6 +70,9 @@
                 <div wire:loading>
                     <span class="loading loading-spinner loading-xs"></span>
                 </div>
+                <button type="button" wire:click='resetForm' class="{{ !empty($image) && !$downloaded ? 'block' : 'hidden' }}">
+                    Reset
+                </button>
             </div>
         </form>
     </div>

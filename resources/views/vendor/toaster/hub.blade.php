@@ -26,7 +26,7 @@
         >
             <i x-text="toast.message"
                class="inline-block select-none not-italic px-6 py-3 rounded shadow-lg text-sm w-full font-bold {{ $alignment->is('bottom') ? 'mt-3' : 'mb-3' }}"
-               :class="toast.select({ error: 'bg-error', info: 'bg-info', success: 'bg-success', warning: 'bg-warning' })"
+               :class="toast.select({ error: 'bg-red-500', info: 'bg-info', success: 'bg-success', warning: 'bg-warning' })"
             ></i>
 
             @if($closeable)
