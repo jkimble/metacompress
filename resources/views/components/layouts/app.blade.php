@@ -22,6 +22,15 @@
                 </p>
             </div>
             {{ $slot }}
+            <nav class="navbar bg-base-200 flex flex-row flex-wrap gap-4 mt-4 rounded-lg">
+                <a class="link-primary hover:link-hover font-semibold text-sm" wire:current.exact='text-white' wire:navigate  href="/">
+                    Home
+                </a>
+                <a class="link-primary hover:link-hover font-semibold text-sm" wire:current='text-white' wire:navigate  href="/privacy">
+                    Privacy
+                </a>
+                <span class="text-slate-400 opacity-75 text-xs ml-auto">feedback@kimbcode.dev</span>
+            </nav>
         </div>
     </div>
     <x-toaster-hub />

@@ -63,10 +63,6 @@
     font-style: normal;
 }
 
-#app {
+body {
     @apply font-montserrat;
-}
-
-.link[active] {
-    @apply text-white;
 }

@@ -93,13 +93,31 @@ class Metacompress extends Component
         if (!empty($this->imgPath)) {
             $this->downloaded = true;
             File::delete($this->image->getRealPath());
-            Toaster::success('Image compressed!');
+            Toaster::success('Image compressed and deleted!');
             return Response::download(Storage::path($this->imgPath), $this->ogFilename . '.' . $this->conversion)->deleteFileAfterSend();
         }
         Toaster::error('No image found.');
     }
 
     public function resetForm() {
+        $this->reset();
+    }
+
+    public function incompleteReset() {
+        if (!empty($this->image) && File::exists($this->image->getRealPath())) {
+            File::delete($this->image->getRealPath());
+            $message = 'Uploaded image deleted.';
+        }
+
+        if (!empty($this->imgPath) && Storage::exists($this->imgPath)) {
+            Storage::delete($this->imgPath);
+            $message = 'Images deleted.';
+        }
+
+        if (isset($message)) {
+            Toaster::info($message);
+        }
+
         $this->reset();
     }
 }

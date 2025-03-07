@@ -70,19 +70,22 @@
                 <div wire:loading>
                     <span class="loading loading-spinner loading-xs"></span>
                 </div>
-                <button type="button" wire:click='resetForm' class="{{ !empty($image) && !$downloaded ? 'block' : 'hidden' }}">
-                    Reset
+            </div>
+            <div class="flex flex-row items-baseline justify-center md:justify-start gap-4 mt-4">
+                <button type="button" wire:click='incompleteReset' class="mt-6 group {{ !empty($image) && !$downloaded ? 'block' : 'hidden' }}">
+                    <span class="font-semibold flex flex-row flex-nowrap gap-2 group-hover:text-error group-focus:text-error transition-colors">
+                        Reset
+                    </span>
                 </button>
+
+                @if($imgPath && !$downloaded)
+                    <button type="button" wire:click='downloadImage' class="btn btn-secondary border-2 border-secondary bg-transparent w-fit {{ $imgPath ? 'opacity-100' : 'opacity-0' }}" {{ $downloaded ? 'disabled' : '' }}>Download Image</button>
+                @endif
+
+                @if($downloaded)
+                    <button type="button" wire:click='resetForm' class="btn btn-primary border-2 border-primary w-fit">Convert another image</button>
+                @endif
             </div>
         </form>
-    </div>
-    <div class="flex flex-col gap-4 mt-4">
-        @if($imgPath)
-        <button wire:click='downloadImage' class="btn btn-secondary border-2 border-secondary bg-transparent w-fit {{ $imgPath ? 'opacity-100' : 'opacity-0' }}" {{ $downloaded ? 'disabled' : '' }}>Download Image</button>
-        @endif
-
-        @if($downloaded)
-        <button wire:click='resetForm' class="btn btn-primary border-2 border-primary w-fit">Convert another image</button>
-        @endif
     </div>
 </div>

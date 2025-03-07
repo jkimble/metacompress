@@ -22,7 +22,7 @@
              @endif
              x-transition:leave-end="opacity-0 scale-90"
              @class(['relative duration-300 transform transition ease-in-out max-w-xs w-full pointer-events-auto', 'text-center' => $position->is('center')])
-             :class="toast.select({ error: 'text-white', info: 'text-black', success: 'text-white', warning: 'text-white' })"
+             :class="toast.select({ error: 'text-black', info: 'text-black', success: 'text-black', warning: 'text-black' })"
         >
             <i x-text="toast.message"
                class="inline-block select-none not-italic px-6 py-3 rounded shadow-lg text-sm w-full font-bold {{ $alignment->is('bottom') ? 'mt-3' : 'mb-3' }}"
