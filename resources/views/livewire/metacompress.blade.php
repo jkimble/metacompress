@@ -67,7 +67,7 @@
                 <button type="submit" class="w-fit" {{ $imgPath ? 'disabled' : '' }}>
                     Compress Image
                 </button>
-                <div wire:loading>
+                <div wire:loading wire:target='compressImage'>
                     <span class="loading loading-spinner loading-xs"></span>
                 </div>
             </div>
