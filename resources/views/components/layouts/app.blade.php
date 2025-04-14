@@ -27,7 +27,7 @@
                 <a class="link-primary hover:link-hover font-semibold text-sm" wire:current='text-white' wire:navigate  href="/privacy">
                     Privacy
                 </a>
-                <span class="text-slate-400 opacity-75 text-xs ml-auto">feedback@kimbcode.dev</span>
+                <span class="text-slate-400 opacity-75 text-xs ml-auto">feedback@mail.kimbcode.dev</span>
             </nav>
         </div>
     </div>
