@@ -61,9 +61,6 @@ class Metacompress extends Component
                 case 'jpeg':
                     Storage::put($imgPath, $newImg->toJpeg($quality, progressive: true));
                     break;
-                case 'tiff':
-                    Storage::put($imgPath, $newImg->toTiff($quality));
-                    break;
                 case 'png':
                     Storage::put($imgPath, $newImg->toPng(indexed: true));
                     break;
@@ -99,11 +96,13 @@ class Metacompress extends Component
         Toaster::error('No image found.');
     }
 
-    public function resetForm() {
+    public function resetForm()
+    {
         $this->reset();
     }
 
-    public function incompleteReset() {
+    public function incompleteReset()
+    {
         $message = null;
         if ($this->image && File::exists($this->image->getRealPath())) {
             File::delete($this->image->getRealPath());
