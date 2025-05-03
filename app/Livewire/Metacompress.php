@@ -104,17 +104,18 @@ class Metacompress extends Component
     }
 
     public function incompleteReset() {
-        if (!empty($this->image) && File::exists($this->image->getRealPath())) {
+        $message = null;
+        if ($this->image && File::exists($this->image->getRealPath())) {
             File::delete($this->image->getRealPath());
             $message = 'Uploaded image deleted.';
         }
 
         if (!empty($this->imgPath) && Storage::exists($this->imgPath)) {
             Storage::delete($this->imgPath);
-            $message = 'Images deleted.';
+            $message = !$message ? 'Image deleted.' : $message . ' and image deleted.';
         }
 
-        if (isset($message)) {
+        if ($message) {
             Toaster::info($message);
         }
 
