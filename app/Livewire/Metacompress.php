@@ -2,18 +2,18 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
 use Intervention\Image\Laravel\Facades\Image;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 use Masmerise\Toaster\Toaster;
-use Masmerise\Toaster\ToasterHub;
 
 class Metacompress extends Component
 {
     use WithFileUploads;
+
     public $image;
     public $imgPath;
     public $quality;
@@ -24,15 +24,13 @@ class Metacompress extends Component
     public $conversion;
     public $downloaded;
     public $name_f;
-    public $alert;
-    public $result;
 
     public function render()
     {
         return view('livewire.metacompress');
     }
 
-    public function compressImage()
+    public function compressImage(): void
     {
         $this->validate([
             'image' => 'required|image|file|max:5000|mimes:png,jpg,jpeg,webp,tiff|extensions:png,jpg,jpeg,webp,tiff',
@@ -101,7 +99,7 @@ class Metacompress extends Component
         $this->reset();
     }
 
-    public function incompleteReset()
+    public function incompleteReset(): void
     {
         $message = null;
         if ($this->image && File::exists($this->image->getRealPath())) {
