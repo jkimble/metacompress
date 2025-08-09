@@ -1,4 +1,4 @@
-name: Deploy VMP
+name: Deploy compress.metakimb.dev
 
 on:
   push:
